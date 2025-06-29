@@ -27,13 +27,10 @@ struct PostItemView: View {
           TextField("Title", text: $vm.title)
             .disableAutocorrection(true)
             .textInputAutocapitalization(.never)
-
           TextField("Location", text: $vm.location)
             .disableAutocorrection(true)
             .textInputAutocapitalization(.never)
-
           DatePicker("Date", selection: $vm.date, displayedComponents: .date)
-
           ZStack(alignment: .topLeading) {
             if vm.description.isEmpty {
               Text("Description")
@@ -59,8 +56,11 @@ struct PostItemView: View {
                 vm.date = Date()
                 vm.type = "lost"
                 postSuccess = true
-              case .failure(let error):
-                print("Post failed:", error)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                  postSuccess = false
+                }
+              case .failure:
+                break
               }
             }
           }
