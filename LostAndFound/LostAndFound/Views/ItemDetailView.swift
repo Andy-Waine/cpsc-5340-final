@@ -14,8 +14,14 @@ struct ItemDetailView: View {
     VStack(spacing: 16) {
       Text(item.title).font(.largeTitle).bold()
       Text(item.type.capitalized).font(.subheadline).foregroundColor(.secondary)
-      Text("Location: \(item.location)").font(.body)
-      Text("Date: \(item.date, style: .date)").font(.body)
+
+      Group {
+        Text("Location: \(item.location)")
+        Text("Date: \(item.date, style: .date)")
+        Text("Posted by: \(item.postedByEmail)")
+      }
+      .font(.body)
+
       Divider()
       Text(item.description).font(.body)
       Spacer()

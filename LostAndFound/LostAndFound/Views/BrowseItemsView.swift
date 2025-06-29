@@ -19,6 +19,9 @@ struct BrowseItemsView: View {
         }
         .pickerStyle(SegmentedPickerStyle())
         .padding()
+        .onChange(of: vm.filterType) { _ in
+          vm.fetchItems()
+        }
 
         List(vm.items) { item in
           NavigationLink(destination: ItemDetailView(item: item)) {
@@ -32,7 +35,6 @@ struct BrowseItemsView: View {
       }
       .navigationTitle("Campus Lost & Found")
       .onAppear { vm.fetchItems() }
-      .onChange(of: vm.filterType) { _ in vm.fetchItems() }
     }
   }
 }

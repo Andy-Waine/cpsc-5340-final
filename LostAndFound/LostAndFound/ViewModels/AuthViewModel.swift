@@ -51,7 +51,9 @@ class AuthViewModel: ObservableObject {
         case .success:
           self?.didSignUp = true
         case .failure(let error):
-          self?.errorMessage = error.localizedDescription
+            print("Sign-Up failed:", error, error._domain, (error as NSError).code)
+            self?.errorMessage = error.localizedDescription
+
         }
       }
     }

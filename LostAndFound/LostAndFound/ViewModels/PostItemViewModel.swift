@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseAuth
 
 class PostItemViewModel: ObservableObject {
   @Published var title = ""
@@ -18,13 +19,15 @@ class PostItemViewModel: ObservableObject {
   private var db = Firestore.firestore()
 
   func save(postedBy uid: String, completion: @escaping (Result<Void, Error>) -> Void) {
+    let email = Auth.auth().currentUser?.email ?? ""
     let data: [String: Any] = [
       "title": title,
       "description": description,
       "location": location,
       "date": Timestamp(date: date),
       "type": type,
-      "postedBy": uid
+      "postedBy": uid,
+      "postedByEmail": email
     ]
 
     db.collection("items").addDocument(data: data) { error in

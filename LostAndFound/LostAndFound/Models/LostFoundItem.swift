@@ -15,4 +15,5 @@ struct LostFoundItem: Identifiable, Codable {
   let date: Date
   let type: String
   let postedBy: String
+  let postedByEmail: String
 }
