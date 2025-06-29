@@ -25,11 +25,25 @@ struct PostItemView: View {
 
         Section(header: Text("Details")) {
           TextField("Title", text: $vm.title)
+            .disableAutocorrection(true)
+            .textInputAutocapitalization(.never)
+
           TextField("Location", text: $vm.location)
+            .disableAutocorrection(true)
+            .textInputAutocapitalization(.never)
+
           DatePicker("Date", selection: $vm.date, displayedComponents: .date)
-          // 3. Description field already present here:
-          TextEditor(text: $vm.description)
-            .frame(height: 100)
+
+          ZStack(alignment: .topLeading) {
+            if vm.description.isEmpty {
+              Text("Description")
+                .foregroundColor(.gray)
+                .padding(.top, 8)
+                .padding(.leading, 4)
+            }
+            TextEditor(text: $vm.description)
+              .frame(height: 100)
+          }
         }
 
         Section {
@@ -39,7 +53,6 @@ struct PostItemView: View {
             vm.save(postedBy: uid) { result in
               switch result {
               case .success:
-                // clear all fields
                 vm.title = ""
                 vm.location = ""
                 vm.description = ""

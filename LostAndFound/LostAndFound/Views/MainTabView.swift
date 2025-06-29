@@ -21,6 +21,11 @@ struct MainTabView: View {
         .tabItem {
           Label("Post", systemImage: "plus.circle")
         }
+
+      AccountView(authViewModel: authViewModel)
+        .tabItem {
+          Label("Account", systemImage: "person.crop.circle")
+        }
     }
   }
 }

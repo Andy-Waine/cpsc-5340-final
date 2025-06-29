@@ -33,7 +33,7 @@ struct BrowseItemsView: View {
           }
         }
       }
-      .navigationTitle("Campus Lost & Found")
+      .navigationTitle("Auburn Lost & Found")
       .onAppear { vm.fetchItems() }
     }
   }
